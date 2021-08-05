@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+let employee = {
+  name: 'Mohammad',
+  age: 17,
+  location: 'New York',
+  "full address": null,
+  paycheckHistory: [
+    {
+      month: 'February',
+      amount: 2000
+    },
+    {
+      month: 'January',
+      amount: 1000
+    },
+    {
+      month: 'December',
+      amount: 1000
+    }
+  ]
+};
+let employeeSummaryFunction = (employee) => {
+employee.age++;
+employee.paycheckHistory[0].amount = 3000;
+employee["full address"] = "1 Union Square West, New York, 10003";
+delete employee.paycheckHistory[2];
+let employeeSummary = `${employee.name} is ${employee.age} years old, lives in ${employee.location} and his last paycheck was $${employee.paycheckHistory[0].amount}.`;
+return employeeSummary;
+};
+console.log(employeeSummaryFunction(employee));
+
+</script>
+</body>
+</html>
