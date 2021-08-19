@@ -54,6 +54,7 @@ describe("GoRest Users API test (/users)", () =>{
       //expect(response.data).to.have.property("name", userToBeCreated.name)
 
       expect(err).to.have.property("statusCode", 401);
+      expect(err).to.be.an.instanceOf(Error);
       expect(err).to.have.property("message", "401 - {\"meta\":null,\"data\":{\"message\":\"Authentication failed\"}}");
     })
 
@@ -74,7 +75,7 @@ describe("GoRest Users API test (/users)", () =>{
         "email": `tenali.ramakrishna-${Math.random().toString(36).slice(2)}@15ce.com`, 
         "status":"active"
       }
-      const response = await api.updateUser(6017);
+      const response = await api.updateUser(6017, userToBeUpdated);
       console.log('\x1b[36m%s\x1b[0m', JSON.stringify(response, null, 2));   
       
       expect(response.data).to.have.property("name", userToBeUpdated.name);

@@ -28,23 +28,24 @@ class UsersApi {
   }
 
   deleteUser(userId) {
-    const path = `/${publicPrefix}/users/${userId}`;
+    const path = `${publicPrefix}/users/${userId}`;
 
     return this.request.delete({
         url: `${this.host}${path}`       
       })
   }
 
-  updateUser(userId) {
-    const path = `/${publicPrefix}/users/${userId}`;
+  updateUser(userId, body) {
+    const path = `${publicPrefix}/users/${userId}`;
 
     return this.request.patch({
-        url: `${this.host}${path}`       
+        url: `${this.host}${path}`,
+        body: body       
       })
   }
 
   getUserById(userId) {
-    const path = `/${publicPrefix}/users/${userId}`;
+    const path = `${publicPrefix}/users/${userId}`;
 
     return this.request.get({
         url: `${this.host}${path}`,         
@@ -52,7 +53,7 @@ class UsersApi {
   }
 
   createUser(userObject) {
-    const path = `/${publicPrefix}/users`;
+    const path = `${publicPrefix}/users`;
 
     return this.request.post({
         url: `${this.host}${path}`,
@@ -61,7 +62,7 @@ class UsersApi {
   }
 
   getUsersList() {
-    const path = `/${publicPrefix}/users`
+    const path = `${publicPrefix}/users`
 
     return this.request.get({
         url: `${this.host}${path}`
