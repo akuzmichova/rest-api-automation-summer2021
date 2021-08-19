@@ -4,7 +4,9 @@
   "description": "REST Api Test Automation Framework",
   "main": "index.js",
   "scripts": {
-    "test": "mocha './**/*.test.js'"
+    "test": "mocha './**/*.test.js'",
+    "test:goRest": "mocha './test/gorest-api/**/*.test.js'",
+    "test:debug": "NODE_DEBUG=request npm run test"
   },
   "repository": {
     "type": "git",

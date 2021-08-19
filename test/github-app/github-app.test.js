@@ -1,6 +1,6 @@
 const {expect} = require("chai");
 const {before} = require("mocha");
-const GithubApi = require("./src/GithubApi")
+const GithubApi = require("../../src/GithubApi")
 
 describe.only("Github API tests", () => {
   let githubApi;
