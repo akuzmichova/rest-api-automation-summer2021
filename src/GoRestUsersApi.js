@@ -16,7 +16,7 @@ class UsersApi {
             "Content-Type": "application/json", 
             "Accept":"application/json"                                  
         },
-        json: true   ,
+        json: true,
         // followAllRedirects: true     
       })
     }
