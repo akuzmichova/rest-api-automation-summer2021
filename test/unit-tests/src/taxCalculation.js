@@ -1,16 +1,16 @@
-function addSalesTax (value) {
-return Number((value*1.06625).toFixed(2));
+function addSalesTax(value) {
+  return Number((value * 1.06625).toFixed(2));
 }
 
 const addTax = (receiptTotals) => {
-    return receiptTotals.map(addSalesTax)
-}
+  return receiptTotals.map(addSalesTax);
+};
 
 /*
-OR 
+OR
 const addTax = (receiptTotals) => {
     return receiptTotals.map((value) => Number((value*1.06625).toFixed(2)));
 }
 */
 
-module.exports = { addTax }
+module.exports = { addTax };

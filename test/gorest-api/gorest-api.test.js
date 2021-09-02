@@ -8,8 +8,7 @@ const wait = require('../../utils/wait')
 describe("GoRest Users API tests (/users)", () =>{
     let api;
     let unAuthenticatedApi;
-    let newUser;
-
+  
     before(() => {
       api = new GoRestUsersApi();
       unAuthenticatedApi = new GoRestUsersApi();
@@ -17,11 +16,21 @@ describe("GoRest Users API tests (/users)", () =>{
       api.authenticate();
       /*api.authenticate({username: "Test", password: "12345"
       });*/
+
+      const {data: usersToBeDeleted } = await api.getUsersList({ email: factory.qaPrefix})
+      
+      await Promise.all(usersToBeDeleted.map(user => {
+        api.deleteUser(user.data.id)
+      }))  
     })
 
-    afterEach(() => {
-      api.deleteUser(newUser, true); 
-      })      
+    afterEach(async () => {
+      const {data: usersToBeDeleted } = await api.getUsersList({ email: factory.qaPrefix})
+      
+      await Promise.all(usersToBeDeleted.map(user => {
+        api.deleteUser(user.data.id)
+      }))   
+    })      
 
   describe("GoRest Users API miscellaneous tests", () => {
       it.only("Error message returned when creating a user as an authenticated user (POST /users)", async () => {
@@ -94,7 +103,7 @@ describe("GoRest Users API tests (/users)", () =>{
 
       const { data: createdUser } = await api.createUser(userToBeCreated);      
      
-      user = createdUser.id;    
+      newUser = createdUser.id;    
      
       expect(createdUser).to.have.property("name", userToBeCreated.name);     
       expect(createdUser).to.have.property("gender", userToBeCreated.gender);
@@ -125,6 +134,8 @@ describe("GoRest Users API tests (/users)", () =>{
         api.createUser(userToBeCreated3)
       ])     
       
+
+
       myUserArray.forEach((user) => {
         expect(user.data).to.have.property("email").that.is.a("string")
       })   
@@ -230,8 +241,15 @@ describe("GoRest Users API tests (/users)", () =>{
       "email": `tenali.ramakrishna-${Math.random().toString(36).slice(2)}@15ce.com`, 
       "status":"inactive"};
     
-      const { data: updatedUser }  = await api.updateUser(userCreatedResponse.data.id, userToBeUpdated);          
-  
+      const { data: updatedUser }  = await api.updateUser(userCreatedResponse.data.id, userToBeUpdated);   
+      
+      const expectedUserUpdated = {
+        ...userToBeUpdated,
+        updated_at: factory.today,
+        updated_by: "admin"
+      }
+
+      expect(updatedUser).to.deep.equal(expectedUserUpdated)
       // without using de-structuring
       // const updatedUser = (await api.updateUser(userCreatedResponse.data.id, userToBeUpdated)).data;
       // const { data } = userUpdatedResponse;      

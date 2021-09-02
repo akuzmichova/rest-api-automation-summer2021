@@ -4,6 +4,6 @@ const guard = async (fn) => {
   } catch (error) {
     return error;
   }
-}
+};
 
 module.exports = guard;
