@@ -7,7 +7,11 @@
     "test": "mocha './**/*.test.js'",
     "test:goRest": "mocha --grep '(slow)' --invert './test/gorest-api/**/*.test.js'",
     "test:goRest:slow": "mocha --grep '(slow)' './test/gorest-api/**/*.test.js'",
-    "test:debug": "NODE_DEBUG=request npm run test"
+    "test:trello": "mocha --grep '(slow)' --invert './test/trello-api/**/*.test.js'",
+    "test:trello:slow": "mocha --grep '(slow)' './test/trello-api/**/*.test.js'",
+    "test:debug": "NODE_DEBUG=request npm run test",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "repository": {
     "type": "git",
@@ -24,8 +28,12 @@
     "slow": 2000
   },
   "dependencies": {
+    "ajv": "^8.6.2",
     "chai": "^4.3.4",
     "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
     "faker": "^5.5.3",
     "mocha": "^9.0.3",
     "moment": "^2.29.1",
